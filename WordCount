@@ -1,0 +1,40 @@
+import os
+
+book_file_path = 'FILEPATH/booktext.txt'
+count_file_path = 'FILEPATH/count.txt'
+
+# Create the book text file if it doesn't exist
+if not os.path.exists(book_file_path):
+    with open(book_file_path, 'w') as f:
+        f.write('')
+
+# Create the count file if it doesn't exist
+if not os.path.exists(count_file_path):
+    with open(count_file_path, 'w') as f:
+        f.write('0')
+
+# Read the current word count from count.txt
+with open(count_file_path, 'r') as f:
+    start_count = int(f.read().strip())
+
+# Read the contents of booktext.txt
+with open(book_file_path, 'r') as f:
+    book_text = f.read()
+
+# Count the number of words in the book text
+word_count = len(book_text.split())
+
+# Calculate the number of words added
+words_added = word_count - start_count
+
+# Calculate the new total word count
+new_count = start_count + words_added
+
+# Print the results
+print(f"Start total: {start_count}")
+print(f"Words added: {words_added}")
+print(f"New total: {new_count}")
+
+# Write the new total word count to count.txt
+with open(count_file_path, 'w') as f:
+    f.write(str(new_count))
